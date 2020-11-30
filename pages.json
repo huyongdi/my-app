@@ -1,0 +1,45 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/weather/index",
+			"style": {
+				"navigationBarTitleText": "天气"
+			}
+		},
+		{
+			"path": "pages/userInfo/index",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		}
+	],
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/weather/index",
+			"iconPath": "static/img/bar-weather-1.svg",
+			"selectedIconPath": "static/img/bar-weather-2.svg",
+			"text": "天气"
+		}, {
+			"pagePath": "pages/userInfo/index",
+			"iconPath": "static/img/bar-user-1.svg",
+			"selectedIconPath": "static/img/bar-user-2.svg",
+			"text": "我的"
+		}]
+	},
+	"globalStyle": {
+		"navigationBarBackgroundColor": "#F8F8F8", // 导航栏背景颜色（同状态栏背景色）
+		"navigationBarTextStyle": "black", // 导航栏标题颜色及状态栏前景颜色，仅支持 black/white
+		"navigationBarTitleText": "uni-app", // 导航栏标题文字内容
+		"backgroundColor": "#F8F8F8" // 下拉显示出来的窗口的背景色	
+	}
+}
