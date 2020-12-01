@@ -63,7 +63,7 @@
 				},
 				dailyArr: [],
 				hourArr: [],
-				place:{}
+				place: {}
 			}
 		},
 		onLoad: function() {
@@ -87,8 +87,12 @@
 			// 根据手机位置初始化天气
 			initWeather() {
 				const $this = this
+				uni.showLoading({
+				    title: '加载中'
+				});
 				uni.getLocation({
 					type: 'wgs84',
+					// geocode: true,
 					success: function(res) {
 						console.log('开始')
 						const location = res.longitude + ',' + res.latitude
@@ -108,7 +112,6 @@
 						key: weatherKey
 					},
 					success: (res) => {
-						console.log(res.data);
 						this.place = res.data.location[0].name
 					}
 				});
@@ -123,7 +126,6 @@
 					},
 					success: (res) => {
 						if (res.statusCode === 200) {
-							console.log(res.data.now)
 							this.nowObj = { ...this.nowObj,
 								...res.data.now
 							}
@@ -141,7 +143,6 @@
 					},
 					success: (res) => {
 						if (res.statusCode === 200) {
-							console.log(res.data.daily)
 							this.dailyArr = res.data.daily
 						}
 					}
@@ -172,7 +173,7 @@
 					},
 					success: (res) => {
 						if (res.statusCode === 200) {
-							console.log(res.data.hourly)
+							 uni.hideLoading();
 							this.hourArr = res.data.hourly.map(item => {
 								item.fxTime = getHourMin(item.fxTime)
 								return item
