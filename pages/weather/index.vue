@@ -69,6 +69,9 @@
 		onLoad: function() {
 			this.initWeather()
 		},
+		onPullDownRefresh: function() {
+			this.initWeather()
+		},
 		computed: {
 			nowMinMax() {
 				if (this.dailyArr[0]) {
@@ -88,7 +91,7 @@
 			initWeather() {
 				const $this = this
 				uni.showLoading({
-				    title: '加载中'
+					title: '加载中'
 				});
 				uni.getLocation({
 					type: 'wgs84',
@@ -173,7 +176,8 @@
 					},
 					success: (res) => {
 						if (res.statusCode === 200) {
-							 uni.hideLoading();
+							uni.hideLoading();
+							uni.stopPullDownRefresh()
 							this.hourArr = res.data.hourly.map(item => {
 								item.fxTime = getHourMin(item.fxTime)
 								return item
@@ -192,7 +196,7 @@
 
 <style scoped lang="less">
 	.wearther-content {
-		background-image: url(@/static/img/weatherBc/test.jpg);
+		background-image: url(@/static/img/weatherBc/bc-1.jpg);
 		background-size: 100%;
 		padding: 0 20rpx;
 		color: #fff;
@@ -232,7 +236,7 @@
 		}
 
 		.update-time {
-			color: #3300FF;
+			color: #d3d3d3;
 			margin-top: 60rpx;
 			border-bottom: 1px solid #ddd;
 			padding-bottom: 10rpx;
