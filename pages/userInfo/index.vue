@@ -3,11 +3,11 @@
 		<view class="top">
 			<image class="top-img" src="@/static/img/my-user.png"></image>
 			<view class="right-name">
-				<view class="nick-name">我是毛衣</view>
-				<view class="sig">这里放个性签名</view>
+				<view class="nick-name">{{name}}</view>
+				<input @blur="saveSig" v-model="sig" class="sig" placeholder="个性签名" />
 			</view>
 		</view>
-		
+
 		<view class="op-lists">
 			<view class="list" @click="logout">
 				<image class="list-img" src="@/static/img/logout.png"></image>
@@ -21,11 +21,29 @@
 	export default {
 		data() {
 			return {
-
+				name: '',
+				sig: ''
 			}
 		},
-		onLoad: function() {},
+		onLoad: function() {
+			this.getName()
+		},
 		methods: {
+			// 从缓存获取信息
+			getName() {
+				const $this = this
+				uni.getStorage({
+					key: 'userInfo',
+					success: function(res) {
+						const userInfo = res.data
+						$this.name = userInfo.username
+					}
+				});
+			},
+			// 保存个性签名
+			saveSig(evevt) {
+				console.log(evevt.detail.value)
+			},
 			logout() {
 				uni.clearStorage()
 				uni.redirectTo({
@@ -45,6 +63,7 @@
 			display: flex;
 			background-color: #fff;
 			margin-bottom: 20rpx;
+
 			.top-img {
 				width: 120rpx;
 				height: 120rpx;
@@ -66,16 +85,19 @@
 				}
 			}
 		}
-		.op-lists{
+
+		.op-lists {
 			background-color: #fff;
-			.list{
+
+			.list {
 				border-bottom: 1px solid #d3d3d3;
 				height: 100rpx;
 				line-height: 100rpx;
 				padding: 0 40rpx;
 				display: flex;
 				align-items: center;
-				.list-img{
+
+				.list-img {
 					width: 60rpx;
 					height: 60rpx;
 					margin-right: 30rpx;
