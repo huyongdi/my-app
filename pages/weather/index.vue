@@ -39,7 +39,7 @@
 						<text class="day-text">{{item.textDay}}/{{item.textNight}}</text>
 						<image class="day-img" :src="require(`@/static/img/weatherIcon/${item.iconDay}.png`)" alt="天图">
 					</view>
-					<view>{{item.tempMin}}℃/{{item.tempMax}}℃</view>
+					<view class="day-temp">{{item.tempMin}}℃/{{item.tempMax}}℃</view>
 				</view>
 			</view>
 		</view>
@@ -302,6 +302,8 @@
 					.day-md {
 						display: flex;
 						align-items: center;
+						min-width: 210rpx;
+						margin-right: -15rpx;
 						.day-text {}
 			
 						.day-img {
@@ -309,6 +311,10 @@
 							height: 80rpx;
 							// margin-bottom: -30rpx;
 						}
+					}
+					.day-temp{
+						min-width: 150rpx;
+						text-align: right;
 					}
 				}
 			}
