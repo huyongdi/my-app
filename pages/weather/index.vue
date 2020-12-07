@@ -212,7 +212,9 @@
 
 <style scoped lang="less">
 	.wearther-content {
-		background-image: url(@/static/img/weatherBc/123.jpg);
+		// background-image: url(@/static/img/weatherBc/air.jpg);
+		background-image: url(
+https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-ab88hy0uypiac206a5/d7ed3000-3835-11eb-b997-9918a5dda011.jpg);
 		background-size: 100% 100%;
 		background-repeat: no-repeat;
 		padding: 0 20rpx;
