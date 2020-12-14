@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "小说",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "my-book": "/pages/book/myBook/index"
+  }
+}

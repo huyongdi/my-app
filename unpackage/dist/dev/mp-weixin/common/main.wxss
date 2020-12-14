@@ -1,0 +1,10 @@
+/*每个页面公共css */
+/* font-size: 100rpx; */
+uni-page-body {
+  height: 100%;
+}
+uni-page-body > uni-view {
+  height: 100%;
+  overflow: auto;
+}
+

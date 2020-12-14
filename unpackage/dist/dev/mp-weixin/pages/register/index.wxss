@@ -1,0 +1,22 @@
+.register-wrap {
+  padding: 30rpx;
+}
+.register-wrap .uni-form-item {
+  margin-bottom: 30rpx;
+}
+.register-wrap .uni-form-item .red-notice {
+  color: red;
+  margin-right: 10rpx;
+}
+.register-wrap .uni-form-item .uni-input {
+  margin-top: 20rpx;
+  background-color: rgba(242, 243, 245);
+  height: 100rpx;
+  -webkit-border-radius: 100rpx;
+          border-radius: 100rpx;
+  padding-left: 30rpx;
+}
+.register-wrap .register-btn {
+  margin-top: 100rpx;
+}
+

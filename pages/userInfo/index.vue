@@ -21,6 +21,7 @@
 	export default {
 		data() {
 			return {
+				id: '',
 				name: '',
 				sig: ''
 			}
@@ -37,12 +38,26 @@
 					success: function(res) {
 						const userInfo = res.data
 						$this.name = userInfo.username
+						$this.id = userInfo._id
+						$this.sig = userInfo.signature
 					}
 				});
 			},
 			// 保存个性签名
 			saveSig(evevt) {
 				console.log(evevt.detail.value)
+				// 这里写一个update更新签名
+				uniCloud.callFunction({
+					name: 'updateUser',
+					data: {
+						id: this.id,
+						signature: evevt.detail.value
+					}
+				}).then((res) => {
+					uni.showToast({
+						title: '签名更新成功！',
+					});
+				})
 			},
 			logout() {
 				uni.clearStorage()

@@ -6,17 +6,21 @@
 		</view>
 		<view class="uni-form-item uni-column">
 			<image class="input-img" src="@/static/img/username.svg"></image>
-			<input v-model="username" class="uni-input" focus placeholder="请输入会员号" />
+			<input v-model="username" class="uni-input" placeholder="请输入会员号" />
 		</view>
 		<view class="uni-form-item uni-column">
 			<image class="input-img" src="@/static/img/password.svg"></image>
 			<input v-model="password" class="uni-input" password placeholder="请输入密码" />
 		</view>
 		<button class="login-btn" type="primary" @click="login">登录</button>
+		<view class="bot-wrap">
+			<view @click="register">新用户注册</view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import uniDrawer from "@/components/uni-drawer/uni-drawer.vue"
 	export default {
 		data() {
 			return {
@@ -24,7 +28,29 @@
 				password: ''
 			}
 		},
-		onLoad: function() {},
+
+		onShareAppMessage: function(res) {
+			if (res.from === 'button') { // 来自页面内分享按钮
+				console.log(res.target)
+			}
+			return {
+				title: '毛衣天气',
+				path: 'pages/login/index'
+			}
+		},
+
+		onLoad: function() {
+			// 如果缓存里面有登录信息，则直接跳转
+			const $this = this
+			uni.getStorage({
+				key: 'userInfo',
+				success: function(res) {
+					if (res.data) {
+						$this.jumpToPage(res.data)
+					}
+				}
+			});
+		},
 		methods: {
 			login() {
 				if (!this.username || !this.password) {
@@ -48,10 +74,7 @@
 							result
 						} = res
 						if (result.status === 200) {
-							console.log('登录成功')
-							uni.switchTab({
-							    url: '/pages/weather/index'
-							});
+							this.jumpToPage(result.data)
 						} else {
 							uni.showModal({
 								content: `登录失败，${result.msg}`,
@@ -60,7 +83,27 @@
 						}
 					})
 				}
+			},
+			// 登录成功之后的操作
+			jumpToPage(userInfo) {
+				console.log(userInfo)
+				uni.setStorage({
+					key: 'userInfo',
+					data: userInfo,
+					success: function() {
+
+					}
+				});
+				uni.switchTab({
+					url: '/pages/weather/index'
+				});
+			},
+			register() {
+				uni.navigateTo({
+					url: '/pages/register/index'
+				});
 			}
+
 		}
 	}
 </script>
@@ -111,6 +154,11 @@
 
 		.login-btn {
 			margin-top: 100rpx;
+		}
+
+		.bot-wrap {
+			text-align: right;
+			margin-top: 40rpx;
 		}
 	}
 </style>

@@ -1,7 +1,6 @@
 'use strict';
 const db = uniCloud.database()
 exports.main = async (event, context) => {
-	console.log(event)
 	const collection = db.collection('uni-id-users')
 	const {
 		username,
@@ -10,9 +9,8 @@ exports.main = async (event, context) => {
 	const res = await collection.where({
 		username,
 		password
-	}).count()
-
-	if (!res.total) {
+	}).get()
+	if (res.affectedDocs === 0) {
 		return {
 			status: 500,
 			msg: '用户名或密码错误！'
@@ -20,7 +18,7 @@ exports.main = async (event, context) => {
 	} else {
 		return {
 			status: 200,
-			msg: '登录成功！'
+			data: res.data[0]
 		}
 	}
 };

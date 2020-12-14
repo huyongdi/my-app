@@ -3,6 +3,7 @@ function getHourMin(fromTime) { // 2020-12-01T16:33+08:00
 		/\.[\d]{3}Z/, '')
 	return str.split(' ')[1].substring(0, 5)
 }
+
 export {
 	getHourMin
 }

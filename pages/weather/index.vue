@@ -81,6 +81,15 @@
 				}
 			}
 		},
+		onShareAppMessage: function(res) {
+			if (res.from === 'button') { // 来自页面内分享按钮
+				console.log(res.target)
+			}
+			return {
+				title: '毛衣天气',
+				path: 'pages/login/index'
+			}
+		},
 		onLoad: function() {
 			this.initWeather()
 		},
@@ -108,6 +117,7 @@
 				uni.showLoading({
 					title: '加载中'
 				});
+				console.log(222)
 				uni.getLocation({
 					type: 'wgs84',
 					// geocode: true,

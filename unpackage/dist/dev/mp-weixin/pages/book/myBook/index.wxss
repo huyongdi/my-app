@@ -1,0 +1,25 @@
+.mybook-wrap.data-v-49a15835 {
+  padding: 10rpx 20rpx;
+}
+.mybook-wrap .top.data-v-49a15835 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.mybook-wrap .top .top-input.data-v-49a15835 {
+  height: 60rpx;
+  background-color: #dedede;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  margin-right: 20rpx;
+  padding-left: 20rpx;
+}
+.mybook-wrap .top .top-img.data-v-49a15835 {
+  height: 50rpx;
+  width: 50rpx;
+}
+

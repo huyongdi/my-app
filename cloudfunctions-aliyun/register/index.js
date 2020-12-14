@@ -6,7 +6,6 @@ exports.main = async (event, context) => {
 		username: event.username,
 		password: event.password
 	}).count()
-	console.log(res)
 	if (res.total) {
 		return {
 			status: 500,
