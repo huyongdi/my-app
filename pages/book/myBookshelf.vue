@@ -1,7 +1,7 @@
 <template>
 	<view class="my-wrap">
 		<view class="my-list">
-			<view class="one" v-for="item in myArr" :key="item._id" @click="deleteBookshelf(item)">
+			<view class="one" v-for="item in myArr" :key="item._id" @click="jumpToRead" @longpress="deleteBookshelf(item)">
 				<image @error="imageError(item)" class="one-left" :src="item.coverImg"></image>
 				<view class="one-right">
 					<text class="book-name">{{item.bookName}}</text>
@@ -82,6 +82,12 @@
 						item.coverImg = 'http://www.biquku.la/modules/article/images/nocover.jpg'
 					}
 				})
+			},
+			// 跳转到阅读详情页
+			jumpToRead() {
+				uni.redirectTo({
+					url: '/pages/book/readBook/index'
+				});
 			}
 		}
 	}

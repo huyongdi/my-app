@@ -2,16 +2,6 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
-			// const $this = this
-			// uni.getStorage({
-			//     key: 'loginStatus',
-			//     success: function (res) {
-			//         console.log(res.data);
-			// 		if (res.data === '1') {
-			// 			$this.jumpToPage()
-			// 		}
-			//     }
-			// });
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -27,7 +17,7 @@
 	// @import url("https://at.alicdn.com/t/font_2232593_xafgi2239m8.css");
 
 	// .iconfont {
-		/* font-size: 100rpx; */
+	/* font-size: 100rpx; */
 	// }
 
 	uni-page-body {
@@ -38,4 +28,10 @@
 			overflow: auto;
 		}
 	}
+	
+	.status_bar {
+	    height: var(--status-bar-height);  
+	    width: 100%;  
+	    background-color: #F8F8F8;  
+	}  
 </style>

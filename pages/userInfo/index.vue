@@ -1,5 +1,8 @@
 <template>
 	<view class="wearther-content">
+		<!-- #ifdef APP-PLUS -->
+		<view class="status_bar"></view>
+		<!-- #endif -->
 		<view class="top">
 			<image class="top-img" src="@/static/img/my-user.png"></image>
 			<view class="right-name">

@@ -1,57 +1,63 @@
 <template>
-	<view class="wearther-content">
-		<view class="now-top">
-			<view class="top-name">
-				{{place}}区 <image class="name-img" :src="require(`@/static/img/weatherIcon/${nowObj.icon}.png`)" alt="top天气图">
-			</view>
-			<view class="top-temp">
-				{{nowObj.temp}}
-				<text class="temp-unit">℃</text>
-			</view>
-			<view class="top-range">
-				{{nowMinMax}}
-				{{nowObj.air}}
-			</view>
-			<view class="top-other">
-				<text class="w-text">
-					{{nowObj.text}}
-				</text>
-				<!-- {{nowObj.vis}}公里 -->
-				{{nowObj.windDir}}
-				{{nowObj.windScale}}级: {{nowObj.windSpeed}}公里/小时
-			</view>
-		</view>
-		<view class="update-time">
-			最新观测时间：{{upDateTime}}
-		</view>
-		<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" scroll-left="120">
-			<view class="scroll-view-item_H" v-for="item in hourArr" :key="item.fxTime">
-				<view>{{item.fxTime}}</view>
-				<image class="hour-img" :src="require(`@/static/img/weatherIcon/${item.icon}.png`)" alt="小时图">
-					<view class="hour-text">{{item.text}}{{item.temp}}℃</view>
-			</view>
-		</scroll-view>
-		<view class="day-wrap">
-			<view class="one-day7" v-for="item in dailyArr" :key="item.fxDate">
-				<view class="one-day">
-					<view>{{item.fxDate}}</view>
-					<view class="day-md">
-						<text class="day-text">{{item.textDay}}/{{item.textNight}}</text>
-						<image class="day-img" :src="require(`@/static/img/weatherIcon/${item.iconDay}.png`)" alt="天图">
-					</view>
-					<view class="day-temp">{{item.tempMin}}℃/{{item.tempMax}}℃</view>
+	<view>
+		<!-- #ifdef APP-PLUS -->
+		<view class="status_bar"></view>
+		<!-- #endif -->
+		<view class="wearther-content">
+			<view class="now-top">
+				<view class="top-name">
+					{{place || '--'}}区 <image class="name-img" :src="require(`@/static/img/weatherIcon/${nowObj.icon}.png`)" alt="top天气图">
+				</view>
+				<view class="top-temp">
+					{{nowObj.temp || '--'}}
+					<text class="temp-unit">℃</text>
+				</view>
+				<view class="top-range">
+					{{nowMinMax}}
+					{{nowObj.air}}
+				</view>
+				<view class="top-other">
+					<text class="w-text">
+						{{nowObj.text}}
+					</text>
+					<!-- {{nowObj.vis}}公里 -->
+					{{nowObj.windDir}}
+					{{nowObj.windScale}}级: {{nowObj.windSpeed}}公里/小时
 				</view>
 			</view>
-		</view>
-		
-		<view class="sun">
-			<view>日出: {{dailyArr[0] && dailyArr[0].sunrise}}</view>
-			<view>日落: {{dailyArr[0] && dailyArr[0].sunset}}</view>
-		</view>
-		<view class="permit-wrap">
-			<a class="permit-link" target="black" href="https://creativecommons.org/licenses/by/4.0">未修改许可</a>
+			<view class="update-time">
+				最新观测时间：{{upDateTime}}
+			</view>
+			<scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" scroll-left="120">
+				<view class="scroll-view-item_H" v-for="item in hourArr" :key="item.fxTime">
+					<view>{{item.fxTime}}</view>
+					<image class="hour-img" :src="require(`@/static/img/weatherIcon/${item.icon}.png`)" alt="小时图">
+						<view class="hour-text">{{item.text}}{{item.temp}}℃</view>
+				</view>
+			</scroll-view>
+			<view class="day-wrap">
+				<view class="one-day7" v-for="item in dailyArr" :key="item.fxDate">
+					<view class="one-day">
+						<view>{{item.fxDate}}</view>
+						<view class="day-md">
+							<text class="day-text">{{item.textDay}}/{{item.textNight}}</text>
+							<image class="day-img" :src="require(`@/static/img/weatherIcon/${item.iconDay}.png`)" alt="天图">
+						</view>
+						<view class="day-temp">{{item.tempMin}}℃/{{item.tempMax}}℃</view>
+					</view>
+				</view>
+			</view>
+
+			<view class="sun">
+				<view>日出: {{dailyArr[0] && dailyArr[0].sunrise}}</view>
+				<view>日落: {{dailyArr[0] && dailyArr[0].sunset}}</view>
+			</view>
+			<view class="permit-wrap">
+				<a class="permit-link" target="black" href="https://creativecommons.org/licenses/by/4.0">未修改许可</a>
+			</view>
 		</view>
 	</view>
+
 </template>
 
 <script>
@@ -117,7 +123,6 @@
 				uni.showLoading({
 					title: '加载中'
 				});
-				console.log(222)
 				uni.getLocation({
 					type: 'wgs84',
 					// geocode: true,
@@ -223,8 +228,7 @@
 <style scoped lang="less">
 	.wearther-content {
 		// background-image: url(@/static/img/weatherBc/air.jpg);
-		background-image: url(
-https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-ab88hy0uypiac206a5/d7ed3000-3835-11eb-b997-9918a5dda011.jpg);
+		background-image: url(https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-ab88hy0uypiac206a5/d7ed3000-3835-11eb-b997-9918a5dda011.jpg);
 		background-size: 100% 100%;
 		background-repeat: no-repeat;
 		padding: 0 20rpx;
@@ -300,8 +304,9 @@ https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-ab88hy0uypiac206a5/d7ed3000-3835
 			}
 		}
 
-		.day-wrap{
+		.day-wrap {
 			min-height: 550rpx;
+
 			.one-day7 {
 				.one-day {
 					display: flex;
@@ -310,21 +315,23 @@ https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-ab88hy0uypiac206a5/d7ed3000-3835
 					border-top: 1px solid #ddd;
 					height: 100rpx;
 					padding: 0 20rpx;
-			
+
 					.day-md {
 						display: flex;
 						align-items: center;
 						min-width: 210rpx;
 						margin-right: -15rpx;
+
 						.day-text {}
-			
+
 						.day-img {
 							width: 80rpx;
 							height: 80rpx;
 							// margin-bottom: -30rpx;
 						}
 					}
-					.day-temp{
+
+					.day-temp {
 						min-width: 150rpx;
 						text-align: right;
 					}

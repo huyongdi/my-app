@@ -95,7 +95,7 @@
 					}
 				});
 				uni.switchTab({
-					url: '/pages/weather/index'
+					url: '/pages/book/index'
 				});
 			},
 			register() {

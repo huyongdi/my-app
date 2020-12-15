@@ -1,5 +1,8 @@
 <template>
 	<view class="mybook-wrap">
+		<!-- #ifdef APP-PLUS -->
+		<view class="status_bar"></view>
+		<!-- #endif -->
 		<view class="top">
 			<image class="top-back" :src="leftImg" @click="typeChange"></image>
 			<input @confirm="beginSearch" @focus="topInputFocus" v-model="searchVal" class="top-input" confirm-type="search"
@@ -101,7 +104,6 @@
 							// 获得小说封面
 							const coverStr = res.data.match(/(?<=fmimg\").+?(?=<span)/)[0]
 							const coverImg = coverStr.match(/(?<=src=\").+?(?=\")/)[0]
-							console.log(coverImg)
 							this.myArr = list.map(val => {
 								if (val.bookPath === item.bookPath) {
 									val.chapterList = chapterList
