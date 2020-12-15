@@ -1,7 +1,7 @@
 <template>
 	<view class="my-wrap">
 		<view class="my-list">
-			<view class="one" v-for="item in myArr" :key="item._id" @click="jumpToRead" @longpress="deleteBookshelf(item)">
+			<view class="one" v-for="item in myArr" :key="item._id" @click="jumpToRead(item)" @longpress="deleteBookshelf(item)">
 				<image @error="imageError(item)" class="one-left" :src="item.coverImg"></image>
 				<view class="one-right">
 					<text class="book-name">{{item.bookName}}</text>
@@ -40,9 +40,6 @@
 			}
 		},
 		mounted: function() {
-			setTimeout(() => {
-				console.log(this.myArr)
-			}, 3000)
 		},
 		methods: {
 			// 从书架中移除
@@ -55,7 +52,6 @@
 							uni.showLoading({
 								title: '移除中...'
 							})
-							console.log($this.userId)
 							uniCloud.callFunction({
 								name: 'book-delete',
 								data: {
@@ -84,9 +80,10 @@
 				})
 			},
 			// 跳转到阅读详情页
-			jumpToRead() {
+			jumpToRead(item) {
+				console.log(item)
 				uni.redirectTo({
-					url: '/pages/book/readBook/index'
+					url: `/pages/book/readBook/index?item=${encodeURIComponent(JSON.stringify(item))}`
 				});
 			}
 		}
