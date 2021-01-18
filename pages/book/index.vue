@@ -37,6 +37,9 @@
 		},
 		onLoad: function() {
 			this.getUser()
+			// #ifdef APP-PLUS
+			plus.navigator.setFullscreen(false)
+			// #endif
 		},
 		computed: {
 			leftImg() {
@@ -109,6 +112,7 @@
 									val.chapterList = chapterList
 									val.coverImg = 'http://www.biquku.la/' + coverImg
 									val.newChapter = chapterList[chapterList.length - 1].name
+									val.read = chapterList[0]
 								}
 								return val
 							})
